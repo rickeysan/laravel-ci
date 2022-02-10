@@ -4,11 +4,11 @@ jobs:
     docker:
       - image: circleci/php:7.3-node-browsers
       - image: circleci/postgres:11.6-alpine
-        enviroment:
+        environment:
           POSTGRES_DB: larasns
           POSTGRES_USER: default
           POSTGRES_PASSWORD: secret
-    enviroment:
+    environment:
       APP_ENV: testing
       DB_CONNECTION: pgsql
       DB_HOST: localhost

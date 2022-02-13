@@ -46,16 +46,16 @@ jobs:
     steps:
       - checkout
       - run: sudo composer self-update --1
-      - resotre_cache:
+      - restore_cache:
           key: composer-no-dev-v1{{ checksum "composer.lock" }}
       - run: composer insatll -n --no-dev --prefer-dist
       - save_cache:
           key: composer-no-dev-v1{{ checksum "composer.lock" }}
           paths:
             - vendor
-      - resotre_cache:
+      - restore_cache:
           key: npm-v1-{{ checksum "package-lock.json" }}
-            - run:
+      - run:
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
@@ -76,7 +76,7 @@ jobs:
       - run:
           name: deploy to prod
           command: |
-            aws deploy create-deployment \
+            aws deploy create-deplfoyment \
             --application-name laravel-ci \
             --deployment-group-name laravel-ci \
             --s3-location bucket=${AWS_S3_BUCKET_NAME},key=laravel-ci.zip,bundleType=zip
